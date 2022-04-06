@@ -12,12 +12,14 @@ import {
   CORRECT_WORD_MESSAGE,
   HARD_MODE_ALERT_MESSAGE,
   DISCOURAGE_INAPP_BROWSER_TEXT,
+  SHARE_FAILURE_TEXT,
 } from './constants/strings'
 import {
   MAX_CHALLENGES,
   REVEAL_TIME_MS,
   WELCOME_INFO_MODAL_MS,
   DISCOURAGE_INAPP_BROWSERS,
+  LONG_ALERT_TIME_MS,
 } from './constants/settings'
 import {
   isWordInWordList,
@@ -290,6 +292,11 @@ function App() {
           isGameLost={isGameLost}
           isGameWon={isGameWon}
           handleShareToClipboard={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
+          handleShareFailure={() =>
+            showErrorAlert(SHARE_FAILURE_TEXT, {
+              durationMs: LONG_ALERT_TIME_MS,
+            })
+          }
           handleMigrateStatsButton={() => {
             setIsStatsModalOpen(false)
             setIsMigrateStatsModalOpen(true)
