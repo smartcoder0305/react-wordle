@@ -34,7 +34,7 @@ $> docker build --target=prod -t reactle:prod -f docker/Dockerfile .
 $> docker run -d -p 80:8080  --name reactle-prod reactle:prod
 ```
 
-Open [http://localhost](http://localhost) in browser.
+Open [http://localhost](http://localhost) in browser. See the [entry in the FAQ](#why-does-sharing-of-results-not-work) below about requirements for sharing of results.
 
 ## FAQ
 
@@ -93,6 +93,10 @@ To enable Plausible Analytics:
 
 - Create a new website with Plausible Analytics with a given domain, e.g. `example.app`
 - In [.env](.env), add `REACT_APP_PLAUSIBLE_DOMAIN=example.app`
+
+### Why does sharing of results not work?
+
+For mobile and wearable devices and smart TVs, sharing of results is initially attempted using the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API). For other devices or when sharing to the Web Share API fails, the results are written to the clipboard. Both these methods will succeed only in a [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts), which require you to implement the HTTPS protocol when hosting this repo on a public domain.
 
 ## Projects built using this repo
 
@@ -181,7 +185,7 @@ To enable Plausible Analytics:
 - [Wordle.cl](https://www.wordle.cl): Chilean modisms, cities, places
 - [Wrdl](https://wrdl-abae.vercel.app/): Words that are 5 letters long after getting rid of their vowels
 - [WROUD](https://www.wroud.net/): W R O U D is a simple word game that challenges people to find a six-letter word in 3 guesses from a cloud of letters. https://www.wroud.net/ A spinoff of Wordle but quite different and may be more fun!. WROUD = Word + Cloud
-- [香港麻雀 糊dle](https://hkwudle.vercel.app/): Mahjong hands under Hong Kong rules
+- [香港麻雀 糊 dle](https://hkwudle.vercel.app/): Mahjong hands under Hong Kong rules
 
 ### Math, Acronyms, Science, Tech, and more
 
