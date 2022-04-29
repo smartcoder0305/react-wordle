@@ -1,2 +1,15 @@
-singleQuote: true
-semi: false
+{
+  "singleQuote": true,
+  "semi": false,
+  "importOrder": [
+    "^(.*).css",
+    "<THIRD_PARTY_MODULES>",
+    "^@/components/(.*)$",
+    "^@/constants/(.*)$",
+    "^@/context/(.*)$",
+    "^@/lib/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
