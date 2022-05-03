@@ -44,6 +44,7 @@ Open [http://localhost](http://localhost) in browser.
 - [Boludle](https://www.boludle.com/): Argentinian
 - [Gerdle](https://gerdle.vext.co.uk/): Cornish (Kernowek)
 - [Jwordle](https://jwordle.vercel.app/): Japanese
+- [Katadel](https://katadel.vercel.app/): Jawi (Malay Arabic script)
 - [Keclap](https://keclap.xyz/): Sundanese
 - [Kelmaly](https://kelmaly.com/): Arabic
 - [Kerdle](https://kerdle.vercel.app/): Cornish/Kernewek (Standard Written Form)
