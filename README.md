@@ -102,6 +102,7 @@ Open [http://localhost](http://localhost) in browser.
 - [JoJodle](https://jojo-news.com/fun/jojodle/): JoJo’s Bizarre Adventure
 - [Mahjong Handle](https://mahjong-handle.update.sh/): Mahjong Hands
 - [Filmle](https://filmle.now.sh/): Movie titles
+- [Fletcherdle](https://www.fletcherdle.com/): American singer-songwriter FLETCHER
 - [Lyricle](https://www.lyricle.app/): Lyrics
 - [Marvle](https://marvle.herokuapp.com): Superhero (Marvel and DC) themed
 - [Movie Wordle](https://movie-wordle.vercel.app): Bollywood
