@@ -114,6 +114,7 @@ Open [http://localhost](http://localhost) in browser.
 - [RareWordle](https://rwordle.vercel.app/): Word guessing with multiple simultaneous solutions of varying "values", all created from the same letters. The goal is to find the most obscure solution. It is inspired by the TV game show Pointless.
 - [Reverdle](https://reverdle.now.sh/): Wordle but in reverse, that is one has to make as many guesses possible which do not have any green letter (i.e. a letter in the correct location compared to the hidden solution).
 - [Squirdle](https://squirdle-inky.vercel.app/): Pokeman
+- [Tacticle](https://tacticle.co/): Chess puzzles
 - [Taylordle](https://www.taylordle.com/): Taylor Swift
 - [Trekle](https://treklegame.com): Star Trek
 - [Weedel](https://meetmeinouter.space/wordle/): Video game characters
