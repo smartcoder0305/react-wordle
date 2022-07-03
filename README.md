@@ -119,6 +119,7 @@ To enable Plausible Analytics:
 - [Sindhal](https://hellosindh.com/sindhal): Sindhi
 - [Szózat](https://szozat.miklosdanka.com/): Hungarian
 - [So'zzana](https://sozzana.netlify.app/): O'zbek (Lotin)
+- [Tatar](https://tatardle.vercel.app/): Tatar (Turkic Language)
 - [Tàu Tâi-gí (Taigi Wordle)](https://tau.taigi.info/): Taigi (Taiwanese)
 - [Telugu](https://teluguwordle.com): Telugu (South Indian Language)
 - [Tlembung](https://tlembung.vercel.app/): Javanese
