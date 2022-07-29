@@ -57,7 +57,7 @@ export const Key = ({
   return (
     <button
       style={styles}
-      aria-label={`${value} ${status}`}
+      aria-label={`${value}${status ? ' ' + status : ''}`}
       className={classes}
       onClick={handleClick}
     >
