@@ -1,0 +1,22 @@
+name: LinkCheck
+
+on:
+  pull_request:
+    branches: [ '*' ]
+    paths:
+      - README.md
+  push:
+    branches: [ '*' ]
+    paths:
+      - README.md
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: docker://dkhamsing/awesome_bot:latest
+      with:
+        args: /github/workspace/README.md --allow-redirect --white-list https://github.com/cwackerfuss/react-wordle/blob/main/.env
