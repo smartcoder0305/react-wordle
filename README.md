@@ -140,6 +140,7 @@ For mobile and wearable devices and smart TVs, sharing of results is initially a
 - [Wörtchen](https://woertchen.sofacoach.de): German
 - [SGWordle](https://sgwordle.now.sh/): Swiss German
 - [kelma.mt](https://kelma.mt): Maltese
+- [Žodelė](https://zodele.lt): Lithuanian
 - [Слівце](https://slivce.com/): Ukrainian
 - [ਪੰਜਾਬੀ](https://punjabipuzzle.netlify.app/): Punjabi
 - [சொல்லாடல் Soladle](https://omtamil.com/soladle): Tamil
