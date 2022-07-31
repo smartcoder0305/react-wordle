@@ -174,6 +174,7 @@ For mobile and wearable devices and smart TVs, sharing of results is initially a
 - [Pawnle](https://pawnle.vercel.app/): Parks and Recreation
 - [Poker Handle](https://kikychow.github.io/poker-wordle/): Poker
 - [Poker Handle 2](https://poker-handle2.com/): Poker
+- [Polygonle](https://www.polygonle.com/): Wordle with a shape-based clue for each character
 - [Quettale](https://quettale.vercel.app/): Quenya, Elven language in LOTR
 - [Radiole](https://radiole.vercel.app/): Radio-themed (for World Radio Day)
 - [RareWordle](https://rwordle.vercel.app/): Word guessing with multiple simultaneous solutions of varying "values", all created from the same letters. The goal is to find the most obscure solution. It is inspired by the TV game show Pointless.
