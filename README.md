@@ -153,7 +153,6 @@ For mobile and wearable devices and smart TVs, sharing of results is initially a
 
 ### Fun themes
 
-- ['en si lì'ur](https://tirea.learnnavi.org/wordle): Na'vi, the constructed language from James Cameron's AVATAR (2009)
 - [Airportle](https://airportle.scottscheapflights.com/): Airport Codes
 - [Anidal](https://anidal-abrarhayat.web.app/): Animals
 - [Birdle - Emojis](https://birdle.dev): Bird emojis
