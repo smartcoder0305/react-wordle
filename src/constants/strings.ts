@@ -32,3 +32,8 @@ export const CURRENT_STREAK_TEXT = 'Current streak'
 export const BEST_STREAK_TEXT = 'Best streak'
 export const DISCOURAGE_INAPP_BROWSER_TEXT =
   "You are using an embedded browser and may experience problems sharing or saving your results. We encourage you rather to use your device's default browser."
+
+export const DATEPICKER_TITLE = 'Choose a past date'
+export const DATEPICKER_CHOOSE_TEXT = 'Choose'
+export const DATEPICKER_TODAY_TEXT = 'today'
+export const ARCHIVE_GAMEDATE_TEXT = 'Game date'

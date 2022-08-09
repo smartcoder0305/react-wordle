@@ -1,8 +1,12 @@
+import { formatISO, parseISO } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
+import queryString from 'query-string'
 
+import { ENABLE_ARCHIVED_GAMES } from '../constants/settings'
 import { NOT_CONTAINED_MESSAGE, WRONG_SPOT_MESSAGE } from '../constants/strings'
 import { VALID_GUESSES } from '../constants/validGuesses'
 import { WORDS } from '../constants/wordlist'
+import { getToday, removeTime } from './dateutils'
 import { getGuessStatuses } from './statuses'
 
 // 1 January 2022 Game Epoch
@@ -79,12 +83,6 @@ export const localeAwareUpperCase = (text: string) => {
     : text.toUpperCase()
 }
 
-export const getToday = () => {
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  return today
-}
-
 export const getLastGameDate = (today: Date) => {
   const t = new Date(today)
   t.setHours(0, 0, 0)
@@ -102,13 +100,13 @@ export const getNextGameDate = (today: Date) => {
   return t
 }
 
-export const getIndex = (today: Date) => {
+export const getIndex = (gameDate: Date) => {
   const start = new Date(firstGameDate)
   let index = -1
   do {
     index++
     start.setDate(start.getDate() + periodInDays)
-  } while (start <= today)
+  } while (start <= gameDate)
 
   return index
 }
@@ -121,15 +119,55 @@ export const getWordOfDay = (index: number) => {
   return localeAwareUpperCase(WORDS[index % WORDS.length])
 }
 
-export const getSolution = (today: Date) => {
-  const nextGameDate = getNextGameDate(today)
-  const index = getIndex(today)
+export const getSolution = (gameDate: Date) => {
+  const nextGameDate = getNextGameDate(gameDate)
+  const index = getIndex(gameDate)
   const wordOfTheDay = getWordOfDay(index)
   return {
     solution: wordOfTheDay,
+    solutionGameDate: gameDate,
     solutionIndex: index,
     tomorrow: nextGameDate.valueOf(),
   }
 }
 
-export const { solution, solutionIndex, tomorrow } = getSolution(getToday())
+export const getGameDate = () => {
+  if (getIsLatestGame()) {
+    return getToday()
+  }
+
+  const parsed = queryString.parse(window.location.search)
+  try {
+    const d = removeTime(parseISO(parsed.d!.toString()))
+    if (d >= getToday() || d < firstGameDate) {
+      setGameDate(getToday())
+    }
+    return d
+  } catch (e) {
+    console.log(e)
+    return getToday()
+  }
+}
+
+export const setGameDate = (d: Date) => {
+  try {
+    if (d < getToday()) {
+      window.location.href = '/?d=' + formatISO(d, { representation: 'date' })
+      return
+    }
+  } catch (e) {
+    console.log(e)
+  }
+  window.location.href = '/'
+}
+
+export const getIsLatestGame = () => {
+  if (!ENABLE_ARCHIVED_GAMES) {
+    return true
+  }
+  const parsed = queryString.parse(window.location.search)
+  return parsed === null || !('d' in parsed)
+}
+
+export const { solution, solutionGameDate, solutionIndex, tomorrow } =
+  getSolution(getGameDate())

@@ -1,17 +1,21 @@
 import './App.css'
 
+import { ClockIcon } from '@heroicons/react/outline'
+import { format } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 import { useEffect, useState } from 'react'
 
 import { AlertContainer } from './components/alerts/AlertContainer'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
+import { DatePickerModal } from './components/modals/DatePickerModal'
 import { InfoModal } from './components/modals/InfoModal'
 import { MigrateStatsModal } from './components/modals/MigrateStatsModal'
 import { SettingsModal } from './components/modals/SettingsModal'
 import { StatsModal } from './components/modals/StatsModal'
 import { Navbar } from './components/navbar/Navbar'
 import {
+  DATE_LOCALE,
   DISCOURAGE_INAPP_BROWSERS,
   LONG_ALERT_TIME_MS,
   MAX_CHALLENGES,
@@ -39,13 +43,19 @@ import {
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   findFirstUnusedReveal,
+  getGameDate,
+  getIsLatestGame,
   isWinningWord,
   isWordInWordList,
+  setGameDate,
   solution,
+  solutionGameDate,
   unicodeLength,
 } from './lib/words'
 
 function App() {
+  const isLatestGame = getIsLatestGame()
+  const gameDate = getGameDate()
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches
@@ -56,6 +66,7 @@ function App() {
   const [isGameWon, setIsGameWon] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
+  const [isDatePickerModalOpen, setIsDatePickerModalOpen] = useState(false)
   const [isMigrateStatsModalOpen, setIsMigrateStatsModalOpen] = useState(false)
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
   const [currentRowClass, setCurrentRowClass] = useState('')
@@ -72,7 +83,7 @@ function App() {
   )
   const [isRevealing, setIsRevealing] = useState(false)
   const [guesses, setGuesses] = useState<string[]>(() => {
-    const loaded = loadGameStateFromLocalStorage()
+    const loaded = loadGameStateFromLocalStorage(isLatestGame)
     if (loaded?.solution !== solution) {
       return []
     }
@@ -100,7 +111,7 @@ function App() {
   useEffect(() => {
     // if no game state on load,
     // show the user the how-to info modal
-    if (!loadGameStateFromLocalStorage()) {
+    if (!loadGameStateFromLocalStorage(true)) {
       setTimeout(() => {
         setIsInfoModalOpen(true)
       }, WELCOME_INFO_MODAL_MS)
@@ -154,7 +165,7 @@ function App() {
   }
 
   useEffect(() => {
-    saveGameStateToLocalStorage({ guesses, solution })
+    saveGameStateToLocalStorage(getIsLatestGame(), { guesses, solution })
   }, [guesses])
 
   useEffect(() => {
@@ -240,12 +251,16 @@ function App() {
       setCurrentGuess('')
 
       if (winningWord) {
-        setStats(addStatsForCompletedGame(stats, guesses.length))
+        if (isLatestGame) {
+          setStats(addStatsForCompletedGame(stats, guesses.length))
+        }
         return setIsGameWon(true)
       }
 
       if (guesses.length === MAX_CHALLENGES - 1) {
-        setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        if (isLatestGame) {
+          setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        }
         setIsGameLost(true)
         showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
           persist: true,
@@ -260,8 +275,19 @@ function App() {
       <Navbar
         setIsInfoModalOpen={setIsInfoModalOpen}
         setIsStatsModalOpen={setIsStatsModalOpen}
+        setIsDatePickerModalOpen={setIsDatePickerModalOpen}
         setIsSettingsModalOpen={setIsSettingsModalOpen}
       />
+
+      {!isLatestGame && (
+        <div className="flex items-center justify-center">
+          <ClockIcon className="h-6 w-6 stroke-gray-600 dark:stroke-gray-300" />
+          <p className="text-base text-gray-600 dark:text-gray-300">
+            {format(gameDate, 'd MMMM yyyy', { locale: DATE_LOCALE })}
+          </p>
+        </div>
+      )}
+
       <div className="mx-auto flex w-full grow flex-col px-1 pt-2 pb-8 sm:px-6 md:max-w-7xl lg:px-8">
         <div className="grow pb-6">
           <Grid
@@ -290,6 +316,7 @@ function App() {
           solution={solution}
           guesses={guesses}
           gameStats={stats}
+          isLatestGame={isLatestGame}
           isGameLost={isGameLost}
           isGameWon={isGameWon}
           handleShareToClipboard={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
@@ -306,6 +333,15 @@ function App() {
           isDarkMode={isDarkMode}
           isHighContrastMode={isHighContrastMode}
           numberOfGuessesMade={guesses.length}
+        />
+        <DatePickerModal
+          isOpen={isDatePickerModalOpen}
+          initialDate={solutionGameDate}
+          handleSelectDate={(d) => {
+            setIsDatePickerModalOpen(false)
+            setGameDate(d)
+          }}
+          handleClose={() => setIsDatePickerModalOpen(false)}
         />
         <MigrateStatsModal
           isOpen={isMigrateStatsModalOpen}
