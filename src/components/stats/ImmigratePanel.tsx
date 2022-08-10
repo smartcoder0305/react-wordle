@@ -1,6 +1,5 @@
 import { SaveIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
-import { array } from 'yargs'
 import { decrypt } from '../../lib/encryption'
 import {
   saveGameStateToLocalStorage,
