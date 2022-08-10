@@ -11,14 +11,14 @@ type Props = {
 
 export const MigrationIntro = ({ handleMigrateStatsButton }: Props) => {
   return (
-    <div className="mt-5 sm:mt-6 columns-2 dark:text-white items-center text-center justify-center items-stretch">
+    <div className="mt-5 columns-2 items-center items-stretch justify-center text-center dark:text-white sm:mt-6">
       <div className="mt-3 text-xs">{MIGRATE_DESCRIPTION_TEXT}</div>
       <button
         type="button"
-        className="inline-flex justify-center items-center text-center mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+        className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
         onClick={handleMigrateStatsButton}
       >
-        <LogoutIcon className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white" />
+        <LogoutIcon className="mr-2 h-6 w-6 cursor-pointer dark:stroke-white" />
         {MIGRATE_BUTTON_TEXT}
       </button>
     </div>

@@ -14,7 +14,7 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         change to show how close your guess was to the word.
       </p>
 
-      <div className="flex justify-center mb-1 mt-4">
+      <div className="mb-1 mt-4 flex justify-center">
         <Cell
           isRevealing={true}
           isCompleted={true}
@@ -30,7 +30,7 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         The letter W is in the word and in the correct spot.
       </p>
 
-      <div className="flex justify-center mb-1 mt-4">
+      <div className="mb-1 mt-4 flex justify-center">
         <Cell value="P" />
         <Cell value="I" />
         <Cell
@@ -46,7 +46,7 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         The letter L is in the word but in the wrong spot.
       </p>
 
-      <div className="flex justify-center mb-1 mt-4">
+      <div className="mb-1 mt-4 flex justify-center">
         <Cell value="V" />
         <Cell value="A" />
         <Cell value="G" />
@@ -57,12 +57,12 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         The letter U is not in the word in any spot.
       </p>
 
-      <p className="mt-6 italic text-sm text-gray-500 dark:text-gray-300">
+      <p className="mt-6 text-sm italic text-gray-500 dark:text-gray-300">
         This is an open source version of the word guessing game we all know and
         love -{' '}
         <a
           href="https://github.com/cwackerfuss/react-wordle"
-          className="underline font-bold"
+          className="font-bold underline"
         >
           check out the code here
         </a>{' '}

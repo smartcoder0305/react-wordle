@@ -18,7 +18,7 @@ const StatItem = ({
   value: string | number
 }) => {
   return (
-    <div className="items-center justify-center m-1 w-1/4 dark:text-white">
+    <div className="m-1 w-1/4 items-center justify-center dark:text-white">
       <div className="text-3xl font-bold">{value}</div>
       <div className="text-xs">{label}</div>
     </div>
@@ -27,7 +27,7 @@ const StatItem = ({
 
 export const StatBar = ({ gameStats }: Props) => {
   return (
-    <div className="flex justify-center my-2">
+    <div className="my-2 flex justify-center">
       <StatItem label={TOTAL_TRIES_TEXT} value={gameStats.totalGames} />
       <StatItem label={SUCCESS_RATE_TEXT} value={`${gameStats.successRate}%`} />
       <StatItem label={CURRENT_STREAK_TEXT} value={gameStats.currentStreak} />
