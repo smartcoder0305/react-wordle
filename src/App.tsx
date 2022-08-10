@@ -1,48 +1,49 @@
-import { useState, useEffect } from 'react'
+import './App.css'
+
+import { default as GraphemeSplitter } from 'grapheme-splitter'
+import { useEffect, useState } from 'react'
+
+import { AlertContainer } from './components/alerts/AlertContainer'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
 import { InfoModal } from './components/modals/InfoModal'
-import { StatsModal } from './components/modals/StatsModal'
+import { MigrateStatsModal } from './components/modals/MigrateStatsModal'
 import { SettingsModal } from './components/modals/SettingsModal'
+import { StatsModal } from './components/modals/StatsModal'
+import { Navbar } from './components/navbar/Navbar'
 import {
-  WIN_MESSAGES,
-  GAME_COPIED_MESSAGE,
-  NOT_ENOUGH_LETTERS_MESSAGE,
-  WORD_NOT_FOUND_MESSAGE,
-  CORRECT_WORD_MESSAGE,
-  HARD_MODE_ALERT_MESSAGE,
-  DISCOURAGE_INAPP_BROWSER_TEXT,
-  SHARE_FAILURE_TEXT,
-} from './constants/strings'
-import {
+  DISCOURAGE_INAPP_BROWSERS,
+  LONG_ALERT_TIME_MS,
   MAX_CHALLENGES,
   REVEAL_TIME_MS,
   WELCOME_INFO_MODAL_MS,
-  DISCOURAGE_INAPP_BROWSERS,
-  LONG_ALERT_TIME_MS,
 } from './constants/settings'
 import {
-  isWordInWordList,
-  isWinningWord,
-  solution,
-  findFirstUnusedReveal,
-  unicodeLength,
-} from './lib/words'
-import { addStatsForCompletedGame, loadStats } from './lib/stats'
+  CORRECT_WORD_MESSAGE,
+  DISCOURAGE_INAPP_BROWSER_TEXT,
+  GAME_COPIED_MESSAGE,
+  HARD_MODE_ALERT_MESSAGE,
+  NOT_ENOUGH_LETTERS_MESSAGE,
+  SHARE_FAILURE_TEXT,
+  WIN_MESSAGES,
+  WORD_NOT_FOUND_MESSAGE,
+} from './constants/strings'
+import { useAlert } from './context/AlertContext'
+import { isInAppBrowser } from './lib/browser'
 import {
+  getStoredIsHighContrastMode,
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
   setStoredIsHighContrastMode,
-  getStoredIsHighContrastMode,
 } from './lib/localStorage'
-import { default as GraphemeSplitter } from 'grapheme-splitter'
-
-import './App.css'
-import { AlertContainer } from './components/alerts/AlertContainer'
-import { useAlert } from './context/AlertContext'
-import { Navbar } from './components/navbar/Navbar'
-import { isInAppBrowser } from './lib/browser'
-import { MigrateStatsModal } from './components/modals/MigrateStatsModal'
+import { addStatsForCompletedGame, loadStats } from './lib/stats'
+import {
+  findFirstUnusedReveal,
+  isWinningWord,
+  isWordInWordList,
+  solution,
+  unicodeLength,
+} from './lib/words'
 
 function App() {
   const prefersDarkMode = window.matchMedia(

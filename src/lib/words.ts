@@ -1,8 +1,9 @@
-import { WORDS } from '../constants/wordlist'
-import { VALID_GUESSES } from '../constants/validGuesses'
-import { WRONG_SPOT_MESSAGE, NOT_CONTAINED_MESSAGE } from '../constants/strings'
-import { getGuessStatuses } from './statuses'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
+
+import { NOT_CONTAINED_MESSAGE, WRONG_SPOT_MESSAGE } from '../constants/strings'
+import { VALID_GUESSES } from '../constants/validGuesses'
+import { WORDS } from '../constants/wordlist'
+import { getGuessStatuses } from './statuses'
 
 // 1 January 2022 Game Epoch
 export const firstGameDate = new Date(2022, 0)

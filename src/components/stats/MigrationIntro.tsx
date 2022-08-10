@@ -1,8 +1,9 @@
+import { LogoutIcon } from '@heroicons/react/outline'
+
 import {
   MIGRATE_BUTTON_TEXT,
   MIGRATE_DESCRIPTION_TEXT,
 } from '../../constants/strings'
-import { LogoutIcon } from '@heroicons/react/outline'
 
 type Props = {
   handleMigrateStatsButton: () => void

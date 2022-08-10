@@ -1,8 +1,9 @@
-import { ReactNode } from 'react'
 import classnames from 'classnames'
-import { CharStatus } from '../../lib/statuses'
+import { ReactNode } from 'react'
+
 import { REVEAL_TIME_MS } from '../../constants/settings'
 import { getStoredIsHighContrastMode } from '../../lib/localStorage'
+import { CharStatus } from '../../lib/statuses'
 import { solution } from '../../lib/words'
 
 type Props = {

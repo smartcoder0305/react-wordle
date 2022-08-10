@@ -1,4 +1,5 @@
 import { fail } from 'assert'
+
 import { WORDS } from './wordlist'
 
 // You may not want the list of solutions to be unique. In that case, disable this test

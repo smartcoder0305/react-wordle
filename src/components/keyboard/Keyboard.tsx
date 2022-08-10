@@ -1,8 +1,9 @@
-import { getStatuses } from '../../lib/statuses'
-import { Key } from './Key'
 import { useEffect } from 'react'
-import { ENTER_TEXT, DELETE_TEXT } from '../../constants/strings'
+
+import { DELETE_TEXT, ENTER_TEXT } from '../../constants/strings'
+import { getStatuses } from '../../lib/statuses'
 import { localeAwareUpperCase } from '../../lib/words'
+import { Key } from './Key'
 
 type Props = {
   onChar: (value: string) => void

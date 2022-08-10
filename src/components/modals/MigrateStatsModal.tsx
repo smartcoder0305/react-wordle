@@ -1,8 +1,9 @@
-import { BaseModal } from './BaseModal'
 import { useState } from 'react'
+
 import { GameStats, StoredGameState } from '../../lib/localStorage'
 import { EmigratePanel } from '../stats/EmigratePanel'
 import { ImmigratePanel } from '../stats/ImmigratePanel'
+import { BaseModal } from './BaseModal'
 
 type Props = {
   isOpen: boolean

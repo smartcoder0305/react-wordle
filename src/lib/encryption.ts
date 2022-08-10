@@ -1,4 +1,5 @@
 import Blowfish from 'egoroof-blowfish'
+
 import { BLOWFISH_IV, BLOWFISH_KEY } from '../constants/settings'
 
 // https://github.com/egoroof/blowfish/blob/master/README.md

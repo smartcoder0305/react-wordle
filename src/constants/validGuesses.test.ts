@@ -1,4 +1,5 @@
 import { fail } from 'assert'
+
 import { VALID_GUESSES } from './validGuesses'
 
 describe('valid guesses', () => {

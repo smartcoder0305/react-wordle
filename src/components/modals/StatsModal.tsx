@@ -1,19 +1,20 @@
-import Countdown from 'react-countdown'
 import { ShareIcon } from '@heroicons/react/outline'
-import { StatBar } from '../stats/StatBar'
-import { Histogram } from '../stats/Histogram'
-import { GameStats } from '../../lib/localStorage'
-import { shareStatus } from '../../lib/share'
-import { tomorrow } from '../../lib/words'
-import { BaseModal } from './BaseModal'
+import Countdown from 'react-countdown'
+
+import { ENABLE_MIGRATE_STATS } from '../../constants/settings'
 import {
-  STATISTICS_TITLE,
   GUESS_DISTRIBUTION_TEXT,
   NEW_WORD_TEXT,
   SHARE_TEXT,
+  STATISTICS_TITLE,
 } from '../../constants/strings'
+import { GameStats } from '../../lib/localStorage'
+import { shareStatus } from '../../lib/share'
+import { tomorrow } from '../../lib/words'
+import { Histogram } from '../stats/Histogram'
 import { MigrationIntro } from '../stats/MigrationIntro'
-import { ENABLE_MIGRATE_STATS } from '../../constants/settings'
+import { StatBar } from '../stats/StatBar'
+import { BaseModal } from './BaseModal'
 
 type Props = {
   isOpen: boolean
