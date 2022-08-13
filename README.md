@@ -160,6 +160,7 @@ For mobile and wearable devices and smart TVs, sharing of results is initially a
 - [Buildly](https://buildly.procurepro.co/): Construction themed
 - [Chipotle](https://chipotlele.herokuapp.com): Chipotle (food, items, etc.) themed
 - [Crosswordle](https://crosswordle.mekoppe.com/): Crossword mashup
+- [DALL-e-dle](https://dall-e-dle.vercel.app/): Provides a DALL-E generated image of the word as a clue
 - [Dundle](https://dundle.dunmiffcord.com/): The Office
 - [FFXIVrdle](https://ffxivrdle.com/): Final Fantasy XIV
 - [Harry Potter](https://www.harrypotterwordle.com/): Harry Potter
