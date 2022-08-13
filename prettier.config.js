@@ -23,6 +23,7 @@ const myPlugin = {
 
 module.exports = {
   plugins: [myPlugin],
+  endOfLine: 'auto',
   singleQuote: true,
   semi: false,
   importOrder: [
