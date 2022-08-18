@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
-import { addDays, format } from 'date-fns'
+import { addDays, format, startOfDay } from 'date-fns'
 import { useState } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
 
@@ -9,7 +9,7 @@ import {
   DATEPICKER_TITLE,
   DATEPICKER_TODAY_TEXT,
 } from '../../constants/strings'
-import { getToday, getYesterday, removeTime } from '../../lib/dateutils'
+import { getToday, getYesterday } from '../../lib/dateutils'
 import {
   firstGameDate,
   getLastGameDate,
@@ -31,7 +31,7 @@ export const DatePickerModal = ({
   handleSelectDate,
   handleClose,
 }: Props) => {
-  const lastGameDate = getLastGameDate(getToday())
+  const lastGameDate = getLastGameDate(getYesterday())
   const [selectedDate, setSelectedDate] = useState(() => {
     if (initialDate == null || initialDate > lastGameDate) {
       return lastGameDate
@@ -68,7 +68,7 @@ export const DatePickerModal = ({
           maxDate={getYesterday()}
           selected={selectedDate}
           excludeDates={excludedDates}
-          onChange={(date: Date) => setSelectedDate(removeTime(date))}
+          onChange={(date: Date) => setSelectedDate(startOfDay(date))}
           inline
           popperClassName="react-datepicker-left"
           renderCustomHeader={({

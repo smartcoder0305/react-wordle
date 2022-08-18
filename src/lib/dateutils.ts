@@ -1,11 +1,4 @@
-export const removeTime = (d: Date) => {
-  return new Date(d.getFullYear(), d.getMonth(), d.getDate())
-}
+import { startOfToday, startOfYesterday } from 'date-fns'
 
-export const getToday = () => removeTime(new Date())
-
-export const getYesterday = () => {
-  const d = getToday()
-  d.setDate(d.getDate() - 1)
-  return removeTime(d)
-}
+export const getToday = () => startOfToday()
+export const getYesterday = () => startOfYesterday()
