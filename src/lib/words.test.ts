@@ -1,9 +1,19 @@
+import { addDays } from 'date-fns'
+
 import {
+  firstGameDate,
   getIndex,
   getLastGameDate,
   getNextGameDate,
   getWordOfDay,
+  isValidGameDate,
+  periodInDays,
 } from './words'
+
+beforeEach(() => {
+  // restore the spy created with spyOn
+  jest.restoreAllMocks()
+})
 
 describe('solutionIndex', () => {
   test('last game date', () => {

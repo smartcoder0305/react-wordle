@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
-import { format } from 'date-fns'
+import { addDays, format } from 'date-fns'
 import { useState } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
 
@@ -10,7 +10,12 @@ import {
   DATEPICKER_TODAY_TEXT,
 } from '../../constants/strings'
 import { getToday, getYesterday, removeTime } from '../../lib/dateutils'
-import { firstGameDate } from '../../lib/words'
+import {
+  firstGameDate,
+  getLastGameDate,
+  isValidGameDate,
+  periodInDays,
+} from '../../lib/words'
 import { BaseModal } from './BaseModal'
 
 type Props = {
@@ -26,9 +31,10 @@ export const DatePickerModal = ({
   handleSelectDate,
   handleClose,
 }: Props) => {
+  const lastGameDate = getLastGameDate(getToday())
   const [selectedDate, setSelectedDate] = useState(() => {
-    if (initialDate == null || initialDate > getYesterday()) {
-      return getYesterday()
+    if (initialDate == null || initialDate > lastGameDate) {
+      return lastGameDate
     }
     return initialDate
   })
@@ -38,6 +44,16 @@ export const DatePickerModal = ({
   const formatOptions = { locale: DATE_LOCALE }
 
   registerLocale('locale', DATE_LOCALE)
+
+  const excludedDates: Date[] = []
+  if (periodInDays > 1) {
+    let date = firstGameDate
+    for (date = firstGameDate; date < getToday(); date = addDays(date, 1)) {
+      if (!isValidGameDate(date)) {
+        excludedDates.push(date)
+      }
+    }
+  }
 
   return (
     <BaseModal
@@ -51,6 +67,7 @@ export const DatePickerModal = ({
           minDate={firstGameDate}
           maxDate={getYesterday()}
           selected={selectedDate}
+          excludeDates={excludedDates}
           onChange={(date: Date) => setSelectedDate(removeTime(date))}
           inline
           popperClassName="react-datepicker-left"
@@ -106,14 +123,16 @@ export const DatePickerModal = ({
       <div className="mt-5 flex columns-2 items-center items-stretch justify-center gap-2 text-center dark:text-white sm:mt-6">
         <button
           type="button"
-          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-base"
+          disabled={!isValidGameDate(getToday())}
+          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-base disabled:bg-gray-500 sm:text-base disabled:border-gray-200
+          disabled:bg-white disabled:text-gray-900 disabled:focus:outline-none disabled:dark:border-gray-600 disabled:dark:bg-gray-800 disabled:dark:text-gray-400"
           onClick={() => handleSelectDate(getToday())}
         >
           {DATEPICKER_CHOOSE_TEXT} {DATEPICKER_TODAY_TEXT}
         </button>
         <button
           type="button"
-          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-500 sm:text-base"
+          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 "
           disabled={selectedDate >= getToday()}
           onClick={() => handleSelectDate(selectedDate)}
         >

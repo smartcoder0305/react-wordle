@@ -1,4 +1,4 @@
-import { formatISO, parseISO } from 'date-fns'
+import { differenceInDays, formatISO, parseISO } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 import queryString from 'query-string'
 
@@ -98,6 +98,14 @@ export const getNextGameDate = (today: Date) => {
   t.setHours(0, 0, 0)
   t.setDate(getLastGameDate(today).getDate() + periodInDays)
   return t
+}
+
+export const isValidGameDate = (date: Date) => {
+  if (date < firstGameDate || date > getToday()) {
+    return false
+  }
+
+  return differenceInDays(firstGameDate, date) % periodInDays === 0
 }
 
 export const getIndex = (gameDate: Date) => {
