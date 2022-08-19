@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: docker://dkhamsing/awesome_bot:latest
         with:
           args: /github/workspace/README.md --allow-redirect --white-list http://localhost,http://localhost:3000,https://github.com/cwackerfuss/react-wordle/blob/main/.env
