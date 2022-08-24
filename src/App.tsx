@@ -4,6 +4,7 @@ import { ClockIcon } from '@heroicons/react/outline'
 import { format } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 import { useEffect, useState } from 'react'
+import Div100vh from 'react-div-100vh'
 
 import { AlertContainer } from './components/alerts/AlertContainer'
 import { Grid } from './components/grid/Grid'
@@ -271,95 +272,97 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen flex-col">
-      <Navbar
-        setIsInfoModalOpen={setIsInfoModalOpen}
-        setIsStatsModalOpen={setIsStatsModalOpen}
-        setIsDatePickerModalOpen={setIsDatePickerModalOpen}
-        setIsSettingsModalOpen={setIsSettingsModalOpen}
-      />
+    <Div100vh>
+      <div className="flex h-screen flex-col">
+        <Navbar
+          setIsInfoModalOpen={setIsInfoModalOpen}
+          setIsStatsModalOpen={setIsStatsModalOpen}
+          setIsDatePickerModalOpen={setIsDatePickerModalOpen}
+          setIsSettingsModalOpen={setIsSettingsModalOpen}
+        />
 
-      {!isLatestGame && (
-        <div className="flex items-center justify-center">
-          <ClockIcon className="h-6 w-6 stroke-gray-600 dark:stroke-gray-300" />
-          <p className="text-base text-gray-600 dark:text-gray-300">
-            {format(gameDate, 'd MMMM yyyy', { locale: DATE_LOCALE })}
-          </p>
-        </div>
-      )}
+        {!isLatestGame && (
+          <div className="flex items-center justify-center">
+            <ClockIcon className="h-6 w-6 stroke-gray-600 dark:stroke-gray-300" />
+            <p className="text-base text-gray-600 dark:text-gray-300">
+              {format(gameDate, 'd MMMM yyyy', { locale: DATE_LOCALE })}
+            </p>
+          </div>
+        )}
 
-      <div className="mx-auto flex w-full grow flex-col px-1 pt-2 pb-8 sm:px-6 md:max-w-7xl lg:px-8">
-        <div className="grow pb-6">
-          <Grid
+        <div className="mx-auto flex w-full grow flex-col px-1 pt-2 pb-8 sm:px-6 md:max-w-7xl lg:px-8">
+          <div className="grow pb-6">
+            <Grid
+              solution={solution}
+              guesses={guesses}
+              currentGuess={currentGuess}
+              isRevealing={isRevealing}
+              currentRowClassName={currentRowClass}
+            />
+          </div>
+          <Keyboard
+            onChar={onChar}
+            onDelete={onDelete}
+            onEnter={onEnter}
             solution={solution}
             guesses={guesses}
-            currentGuess={currentGuess}
             isRevealing={isRevealing}
-            currentRowClassName={currentRowClass}
           />
+          <InfoModal
+            isOpen={isInfoModalOpen}
+            handleClose={() => setIsInfoModalOpen(false)}
+          />
+          <StatsModal
+            isOpen={isStatsModalOpen}
+            handleClose={() => setIsStatsModalOpen(false)}
+            solution={solution}
+            guesses={guesses}
+            gameStats={stats}
+            isLatestGame={isLatestGame}
+            isGameLost={isGameLost}
+            isGameWon={isGameWon}
+            handleShareToClipboard={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
+            handleShareFailure={() =>
+              showErrorAlert(SHARE_FAILURE_TEXT, {
+                durationMs: LONG_ALERT_TIME_MS,
+              })
+            }
+            handleMigrateStatsButton={() => {
+              setIsStatsModalOpen(false)
+              setIsMigrateStatsModalOpen(true)
+            }}
+            isHardMode={isHardMode}
+            isDarkMode={isDarkMode}
+            isHighContrastMode={isHighContrastMode}
+            numberOfGuessesMade={guesses.length}
+          />
+          <DatePickerModal
+            isOpen={isDatePickerModalOpen}
+            initialDate={solutionGameDate}
+            handleSelectDate={(d) => {
+              setIsDatePickerModalOpen(false)
+              setGameDate(d)
+            }}
+            handleClose={() => setIsDatePickerModalOpen(false)}
+          />
+          <MigrateStatsModal
+            isOpen={isMigrateStatsModalOpen}
+            handleClose={() => setIsMigrateStatsModalOpen(false)}
+          />
+          <SettingsModal
+            isOpen={isSettingsModalOpen}
+            handleClose={() => setIsSettingsModalOpen(false)}
+            isHardMode={isHardMode}
+            handleHardMode={handleHardMode}
+            isDarkMode={isDarkMode}
+            handleDarkMode={handleDarkMode}
+            isHighContrastMode={isHighContrastMode}
+            handleHighContrastMode={handleHighContrastMode}
+          />
+          <AlertContainer />
         </div>
-        <Keyboard
-          onChar={onChar}
-          onDelete={onDelete}
-          onEnter={onEnter}
-          solution={solution}
-          guesses={guesses}
-          isRevealing={isRevealing}
-        />
-        <InfoModal
-          isOpen={isInfoModalOpen}
-          handleClose={() => setIsInfoModalOpen(false)}
-        />
-        <StatsModal
-          isOpen={isStatsModalOpen}
-          handleClose={() => setIsStatsModalOpen(false)}
-          solution={solution}
-          guesses={guesses}
-          gameStats={stats}
-          isLatestGame={isLatestGame}
-          isGameLost={isGameLost}
-          isGameWon={isGameWon}
-          handleShareToClipboard={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
-          handleShareFailure={() =>
-            showErrorAlert(SHARE_FAILURE_TEXT, {
-              durationMs: LONG_ALERT_TIME_MS,
-            })
-          }
-          handleMigrateStatsButton={() => {
-            setIsStatsModalOpen(false)
-            setIsMigrateStatsModalOpen(true)
-          }}
-          isHardMode={isHardMode}
-          isDarkMode={isDarkMode}
-          isHighContrastMode={isHighContrastMode}
-          numberOfGuessesMade={guesses.length}
-        />
-        <DatePickerModal
-          isOpen={isDatePickerModalOpen}
-          initialDate={solutionGameDate}
-          handleSelectDate={(d) => {
-            setIsDatePickerModalOpen(false)
-            setGameDate(d)
-          }}
-          handleClose={() => setIsDatePickerModalOpen(false)}
-        />
-        <MigrateStatsModal
-          isOpen={isMigrateStatsModalOpen}
-          handleClose={() => setIsMigrateStatsModalOpen(false)}
-        />
-        <SettingsModal
-          isOpen={isSettingsModalOpen}
-          handleClose={() => setIsSettingsModalOpen(false)}
-          isHardMode={isHardMode}
-          handleHardMode={handleHardMode}
-          isDarkMode={isDarkMode}
-          handleDarkMode={handleDarkMode}
-          isHighContrastMode={isHighContrastMode}
-          handleHighContrastMode={handleHighContrastMode}
-        />
-        <AlertContainer />
       </div>
-    </div>
+    </Div100vh>
   )
 }
 
