@@ -118,6 +118,7 @@ For mobile and wearable devices and smart TVs, sharing of results is initially a
 - [Lexoula](https://lexoula.com/): Ελληνικά (Greek)
 - [Malay](https://malay-wordle.netlify.app/): Bahasa Malaysia
 - [Mondle](https://mondle.vercel.app/): Mongolian
+- [Parig](https://www.parig.xyz/): Western Armenian
 - [Parolette](https://parolette.netlify.app/): Italian
 - [Parolle.it](https://parolle.it): Italian
 - [Pashtoodle](https://pashtoodle.lingdocs.com): Pashto
