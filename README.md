@@ -197,6 +197,7 @@ For mobile and wearable devices and smart TVs, sharing of results is initially a
 ### Math, Acronyms, Science, Tech, and more
 
 - [AI-powered](https://github.com/asirota/wordle-ai): Includes an AI component
+- [Biordle](https://biordle.grenteam.com): Biology
 - [Colordle](https://github.com/necropolina/colordle): Guess the hexadecimal color code of the background
 - [Genel](https://andrewholding.github.io/gene-wordle/): Gene symbols
 - [Jazle](https://jazle.quest/): Javascript
